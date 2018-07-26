@@ -3,10 +3,10 @@ const mongoService = require('./mongo-service');
 const ObjectId = require('mongodb').ObjectId;
 
 
-function checkLogin({ nickname }) {
-    return mongoService.connect()
-        .then(db => db.collection('user').findOne({ nickname }))
-}
+// function checkLogin({ nickname }) {
+//     return mongoService.connect()
+//         .then(db => db.collection('user').findOne({ nickname }))
+// }
 
 
 function getById(id) {
@@ -22,16 +22,16 @@ function query() {
         .then(db => db.collection('user').find({}).toArray())
 }
 
-// todo  - add user only if nickname is not taken
-function addUser({ nickname }) {
-    var user = { nickname }
-    return mongoService.connect()
-        .then(db => db.collection('user').insertOne(user))
-        .then(res => {
-            user._id = res.insertedId
-            return user
-        })
-}
+// // todo  - add user only if nickname is not taken
+// function addUser({ nickname }) {
+//     var user = { nickname }
+//     return mongoService.connect()
+//         .then(db => db.collection('user').insertOne(user))
+//         .then(res => {
+//             user._id = res.insertedId
+//             return user
+//         })
+//  }
 
 
 
@@ -42,6 +42,6 @@ function addUser({ nickname }) {
 module.exports = {
     query,
     getById,
-    addUser,
-    checkLogin
+    // addUser,
+    // checkLogin
 }

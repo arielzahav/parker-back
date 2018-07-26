@@ -7,6 +7,7 @@ const session = require('express-session')
 const userService = require('./services/user-service')
 
 const addParkingRoutes = require('./routes/parking-route')
+const addUserRoutes = require('./routes/user-route')
 
 
 
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
 })
 
 addParkingRoutes(app);
+addUserRoutes(app);
 
 
 

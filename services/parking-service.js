@@ -28,6 +28,23 @@ function getById(parkingId) {
         })
 }
 
+function getByOwnerId(owrId) {
+    owrId = new ObjectId(owrId)
+    return mongoService.connect()
+        .then(db => {
+            const collection = db.collection('parking');
+            return collection.find({ ownerId: owrId }).toArray();
+        })
+}
+
+function getByReservedId(rsvId) {
+    rsvId = new ObjectId(rsvId)
+    return mongoService.connect()
+        .then(db => {
+            const collection = db.collection('parking');
+            return collection.find({ reserverId: rsvId }).toArray();
+        })
+}
 function add(parking) {
     parking.ownerId = new ObjectId(parking.ownerId);
     parking.createdAt = Date.now(); 
@@ -77,5 +94,7 @@ module.exports = {
     getById,
     add,
     update,
-    reserve
+    reserve,
+    getByOwnerId,
+    getByReservedId
 }
