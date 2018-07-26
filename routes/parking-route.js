@@ -56,13 +56,19 @@ function addParkingRoutes(app) {
             })
     })
 
-    // UPDATE
+    // // UPDATE
+    // app.put('/parking/:parkingId', (req, res) => {
+    //     const parking = req.body;
+    //     parkingService.update(parking)
+    //         .then(parking => res.json(parking))
+    // })
+    
+    // Reserving
     app.put('/parking/:parkingId', (req, res) => {
-        const parking = req.body;
-        parkingService.update(parking)
-            .then(parking => res.json(parking))
+        const reserving = req.body;
+        parkingService.reserve(reserving)
+            .then(reserving => res.json(reserving))
     })
-
 }
 
 
