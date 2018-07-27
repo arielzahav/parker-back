@@ -3,12 +3,20 @@ const parkingService = require('../services/parking-service')
 const BASE = '/user'
 
 function addUserRoutes(app) {
-    app.get(BASE, (req, res) => {
+    app.get('/user', (req, res) => {
         userService.query()
             .then(users => res.json(users))
     })
-
-    app.get(`${BASE}/:id`, (req, res) => {
+    
+    app.post('/login', (req, res) => {
+        const mail = req.body
+        console.log('email:',mail);
+        
+        userService.checkLogin(mail)
+            .then(user => res.json(user)).catch(err =>{console.log('user is not exist');
+            })
+    })
+    app.get('/user/:id', (req, res) => {
         const userId = req.params.id
         Promise.all([
             userService.getById(userId),
