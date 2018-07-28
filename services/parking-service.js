@@ -28,12 +28,12 @@ function getById(parkingId) {
         })
 }
 
-function getByOwnerId(owrId) {
-    owrId = new ObjectId(owrId)
+function getByOwnerId(ownerId) {
+    ownerId = new ObjectId(ownerId)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('parking');
-            return collection.find({ ownerId: owrId }).toArray();
+            return collection.find({ ownerId: ownerId }).toArray();
         })
 }
 

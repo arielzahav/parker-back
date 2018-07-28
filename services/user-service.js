@@ -3,14 +3,22 @@ const mongoService = require('./mongo-service');
 const ObjectId = require('mongodb').ObjectId;
 
 
-// function checkLogin({ nickname }) {
-//     return mongoService.connect()
-//         .then(db => db.collection('user').findOne({ nickname }))
-// }
+function checkLogin(user) {
+    console.log('email transferred to backend uesr service: ', user)
+    return mongoService.connect()
+        .then(db => db.collection('user').findOne({ eMail: user.email}))
+        .then(user => {
+            console.log('user found in DB: ', user)            
+            if (user._id) return Promise.resolve(user)
+            else return Promise.reject
+        })
+}
 
 
 function getById(id) {
+    console.log('get by id: ', id)
     const _id = new ObjectId(id)
+    console.log('userId: ', _id)
     return mongoService.connect()
         .then(db => db.collection('user').findOne({ _id }))
 }
@@ -42,6 +50,6 @@ function query() {
 module.exports = {
     query,
     getById,
+    checkLogin,
     // addUser,
-    // checkLogin
 }
