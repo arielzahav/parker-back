@@ -3,6 +3,7 @@ const mongoService = require('./mongo-service');
 const ObjectId = require('mongodb').ObjectId;
 
 
+<<<<<<< HEAD
 function checkLogin(user) {
     console.log('email transferred to backend uesr service: ', user)
     return mongoService.connect()
@@ -12,6 +13,12 @@ function checkLogin(user) {
             if (user._id) return Promise.resolve(user)
             else return Promise.reject
         })
+=======
+function checkLogin(mail) {
+    console.log('mail:',mail)
+    return mongoService.connect()
+        .then(db => db.collection('user').findOne(mail))
+>>>>>>> cace69c8b755c4b1c8a1a02e5d54fde87184f163
 }
 
 
@@ -52,4 +59,8 @@ module.exports = {
     getById,
     checkLogin,
     // addUser,
+<<<<<<< HEAD
+=======
+    checkLogin
+>>>>>>> cace69c8b755c4b1c8a1a02e5d54fde87184f163
 }
