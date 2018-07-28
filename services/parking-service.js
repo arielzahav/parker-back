@@ -28,12 +28,12 @@ function getById(parkingId) {
         })
 }
 
-function getByOwnerId(owrId) {
-    owrId = new ObjectId(owrId)
+function getByOwnerId(ownerId) {
+    ownerId = new ObjectId(ownerId)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('parking');
-            return collection.find({ ownerId: owrId }).toArray();
+            return collection.find({ ownerId: ownerId }).toArray();
         })
 }
 
@@ -64,12 +64,13 @@ function add(parking) {
 function reserve(rsv) {
     rsv.reserverId = new ObjectId(rsv.reserverId)
     rsv.parkingId = new ObjectId(rsv.parkingId)
+    console.log(rsv)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('parking');
             return collection.updateOne({ _id: rsv.parkingId }, 
-                             { $set:{reserverId: rsv.reserverId, occupiedUntil:rsv.occupiedUntil} })
-                .then(result => {
+                             { $set:{reserverId: rsv.reserverId, occupiedUntil: rsv.occupiedUntil} })
+                .then(result => {                    
                     return rsv;
                 })
         })
