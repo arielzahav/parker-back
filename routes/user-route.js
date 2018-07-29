@@ -7,12 +7,6 @@ function addUserRoutes(app) {
         userService.query()
             .then(users => res.json(users))
     })
-<<<<<<< HEAD
-
-    app.get(`${BASE}/:userId`, (req, res) => {
-        const userId = req.params.userId
-        console.log('userID in route : ', userId)
-=======
     
     app.post('/login', (req, res) => {
         const mail = req.body
@@ -24,7 +18,6 @@ function addUserRoutes(app) {
     })
     app.get('/user/:id', (req, res) => {
         const userId = req.params.id
->>>>>>> cace69c8b755c4b1c8a1a02e5d54fde87184f163
         Promise.all([
             userService.getById(userId),
             parkingService.getByOwnerId(userId),
