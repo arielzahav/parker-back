@@ -28,21 +28,21 @@ function getById(parkingId) {
         })
 }
 
-function getByOwnerId(ownerId) {
-    ownerId = new ObjectId(ownerId)
+function getOwnedParkingsByUserId(userId) {
+    userId = new ObjectId(userId)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('parking');
-            return collection.find({ ownerId: ownerId }).toArray();
+            return collection.find({ ownerId: userId }).toArray();
         })
 }
 
-function getByReservedId(rsvId) {
-    rsvId = new ObjectId(rsvId)
+function getReservedParkingsByUserId(userId) {
+    userId = new ObjectId(userId)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('parking');
-            return collection.find({ reserverId: rsvId }).toArray();
+            return collection.find({ reserverId: userId }).toArray();
         })
 }
 function add(parking) {
@@ -96,6 +96,6 @@ module.exports = {
     add,
     update,
     reserve,
-    getByOwnerId,
-    getByReservedId
+    getOwnedParkingsByUserId,
+    getReservedParkingsByUserId
 }
