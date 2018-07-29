@@ -7,12 +7,17 @@ function addUserRoutes(app) {
         userService.query()
             .then(users => res.json(users))
     })
-
-    app.get(`${BASE}/:userId`, (req, res) => {
-        console.log('req params: ', req.params)
-        const userId = req.params.userId
-        // console.log('req params userId : ', req.params.userId)
-        // console.log('userID in route : ', userId)
+    
+    app.post('/login', (req, res) => {
+        const mail = req.body
+        console.log('email:',mail);
+        
+        userService.checkLogin(mail)
+            .then(user => res.json(user)).catch(err =>{console.log('user is not exist');
+            })
+    })
+    app.get('/user/:id', (req, res) => {
+        const userId = req.params.id
         Promise.all([
             userService.getById(userId),
             parkingService.getOwnedParkingsByUserId(userId),
