@@ -43,9 +43,9 @@ function addUserRoutes(app) {
     })
 
     app.post(`${BASE}/checkLogin`, (req,res) => {
-        console.log('req', req)
-        var email = req.body
-        userService.checkLogin(email)
+        console.log('req ', req)
+        var userInfo = req.body
+        userService.checkLogin(userInfo)
         .then (user => {
             console.log('user returned to user route: ', user)
             req.session.user = user
