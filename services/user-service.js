@@ -13,11 +13,19 @@ function checkLogin(user) {
             else return Promise.reject
         })
 }
+<<<<<<< HEAD
 // { "attributes.id": 1, "attributes.value": 150 }
 // { password: user.userInfo.password }, { eMail: user.userInfo.email }
 function getById(id) {
     console.log('get by id: ', id)
     const _id = new ObjectId(id)
+=======
+
+
+function getById(userId) {
+    console.log('get by id: ', userId)
+    const _id = new ObjectId(userId)
+>>>>>>> 1c041c48a4e003aa17748cac5e9b76fda38e44fe
     console.log('userId: ', _id)
     return mongoService.connect()
         .then(db => db.collection('user').findOne({ _id }))

@@ -40,6 +40,14 @@ function addParkingRoutes(app) {
         // })
     })
 
+    // CREATE
+    app.post('/parking/add', (req, res) => {
+        const parking = req.body;
+        parkingService.add(parking)
+            .then(parking => {
+                res.json(parking)
+            })
+    })
     // DELETE
     app.delete('/parking/:parkingId', (req, res) => {
         const parkingId = req.params.parkingId;
@@ -47,14 +55,6 @@ function addParkingRoutes(app) {
             .then(() => res.end(`Parking ${parkingId} Deleted `))
     })
 
-    // CREATE
-    app.post('/parking', (req, res) => {
-        const parking = req.body;
-        parkingService.add(parking)
-            .then(parking => {
-                res.json(parking)
-            })
-    })
 
     // // UPDATE
     // app.put('/parking/:parkingId', (req, res) => {
@@ -63,9 +63,21 @@ function addParkingRoutes(app) {
     //         .then(parking => res.json(parking))
     // })
     
+
+
+    // stop Parking
+    app.put('/parking/stop', (req, res) => {
+        console.log('req.body: ', req.body)
+        const parking = req.body
+        parkingService.stop(parking)
+            .then(parking => res.json(parking))
+    })
+
+
     // Reserving
-    app.put('/parking/:parkingId', (req, res) => {
+    app.put('/parking/reserve/:parkingId', (req, res) => {
         const reserving = req.body;
+        console.log('reserving: ', reserving)
         parkingService.reserve(reserving)
             .then(reserving => res.json(reserving))
     })

@@ -28,21 +28,21 @@ function getById(parkingId) {
         })
 }
 
-function getByOwnerId(ownerId) {
-    ownerId = new ObjectId(ownerId)
+function getOwnedParkingsByUserId(userId) {
+    userId = new ObjectId(userId)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('parking');
-            return collection.find({ ownerId: ownerId }).toArray();
+            return collection.find({ ownerId: userId }).toArray();
         })
 }
 
-function getByReservedId(rsvId) {
-    rsvId = new ObjectId(rsvId)
+function getReservedParkingsByUserId(userId) {
+    userId = new ObjectId(userId)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('parking');
-            return collection.find({ reserverId: rsvId }).toArray();
+            return collection.find({ reserverId: userId }).toArray();
         })
 }
 function add(parking) {
@@ -50,7 +50,7 @@ function add(parking) {
     parking.createdAt = Date.now(); 
     return mongoService.connect()
         .then(db => {
-            const collection = db.collection('parking');
+            const collection = db.collection('tester');
             return collection.insertOne(parking)
                 .then(result => {
                     parking._id = result.insertedId;
@@ -61,24 +61,42 @@ function add(parking) {
 
 
 
-function reserve(rsv) {
-    rsv.reserverId = new ObjectId(rsv.reserverId)
-    rsv.parkingId = new ObjectId(rsv.parkingId)
-    console.log(rsv)
+function reserve(parking) {
+    console.log('rsv parking in backend service: ', parking)
+    parking.reserverId = new ObjectId(parking.reserverId)
+    parking._id = new ObjectId(parking._id)
+    console.log(parking)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('parking');
-            return collection.updateOne({ _id: rsv.parkingId }, 
-                             { $set:{reserverId: rsv.reserverId, occupiedUntil: rsv.occupiedUntil} })
+            return collection.updateOne({ _id: parking._id }, 
+                             { $set:{reserverId: parking.reserverId, occupiedUntil: parking.occupiedUntil} })
                 .then(result => {                    
-                    return rsv;
+                    return parking;
                 })
         })
 }
 
 
 function update(parking) {
+    console.log('parking in the parking service in backend: ', parking)
     parking._id = new ObjectId(parking._id)
+    parking.reserverId = new Object(parking.reserverId)
+    parking.ownerId = new Object(parking.ownerId)
+    return mongoService.connect()
+        .then(db => {
+            const collection = db.collection('parking');
+            return collection.updateOne({ _id: parking._id }, { $set: parking })
+                .then(result => {
+                    return parking;
+                })
+        })
+}
+function stop(parking) {
+    console.log('parking in the parking service in backend: ', parking)
+    parking._id = new ObjectId(parking._id)
+    // parking.reserverId = new Object(parking.reserverId)
+    parking.ownerId = new ObjectId(parking.ownerId)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('parking');
@@ -96,6 +114,7 @@ module.exports = {
     add,
     update,
     reserve,
-    getByOwnerId,
-    getByReservedId
+    stop,
+    getOwnedParkingsByUserId,
+    getReservedParkingsByUserId
 }

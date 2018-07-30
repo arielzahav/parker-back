@@ -20,10 +20,10 @@ function addUserRoutes(app) {
         const userId = req.params.id
         Promise.all([
             userService.getById(userId),
-            parkingService.getByOwnerId(userId),
-            parkingService.getByReservedId(userId)
+            parkingService.getOwnedParkingsByUserId(userId),
+            parkingService.getReservedParkingsByUserId(userId)
         ])
-        .then (([user,reservedParkings,ownedParkings]) => {
+        .then (([user,ownedParkings,reservedParkings]) => {
             console.log('user: ', {user})
             console.log('reserved parkings: ', {reservedParkings})
             console.log('owned parkings: ', {ownedParkings})
