@@ -43,10 +43,10 @@ function addParkingRoutes(app) {
     // CREATE
     app.post('/parking/add', (req, res) => {
         const parking = req.body;
-        parkingService.add(parking)
-            .then(parking => {
-                res.json(parking)
-            })
+        console.log('46-route:',parking);
+        
+            parkingService.add(parking)
+            .then(parking =>  res.json(parking))
     })
     // DELETE
     app.delete('/parking/:parkingId', (req, res) => {

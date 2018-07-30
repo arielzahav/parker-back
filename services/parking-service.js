@@ -46,11 +46,15 @@ function getReservedParkingsByUserId(userId) {
         })
 }
 function add(parking) {
+    console.log('parking49:',parking);
     parking.ownerId = new ObjectId(parking.ownerId);
+    console.log('parking.ownerId!!!!!!!', parking.ownerId);
+    
     parking.createdAt = Date.now(); 
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('tester');
+            console.log('parking55:',parking);
             return collection.insertOne(parking)
                 .then(result => {
                     parking._id = result.insertedId;
