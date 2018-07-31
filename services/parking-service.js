@@ -48,9 +48,6 @@ function getReservedParkingsByUserId(userId) {
 function add(parking) {
     console.log('parking49:',parking);
     parking.ownerId = new ObjectId(parking.ownerId);
-<<<<<<< HEAD
-    parking.createdAt = Date.now();
-=======
     console.log('parking.ownerId!!!!!!!', parking.ownerId);
     parking.position = {
         type : 'Point',
@@ -58,7 +55,6 @@ function add(parking) {
     }
     
     parking.createdAt = Date.now(); 
->>>>>>> c38c79518a1530aba64bef808a055bd9ccdb532c
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('tester2');
