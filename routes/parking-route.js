@@ -7,6 +7,7 @@ function addParkingRoutes(app) {
 
     // LIST
     app.get('/parking', (req, res) => {
+        console.log('req query: ', req.query)
         var lng = +req.query.lng
         var lat = +req.query.lat
         parkingService.getParkingsByLocation(lng,lat)
