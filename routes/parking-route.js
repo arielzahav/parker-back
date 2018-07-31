@@ -7,9 +7,10 @@ function addParkingRoutes(app) {
 
     // LIST
     app.get('/parking', (req, res) => {
-        parkingService.query()
+        var lng = +req.query.lng
+        var lat = +req.query.lat
+        parkingService.getParkingsByLocation(lng,lat)
             .then(parkings => res.json(parkings))
-            
     })
 
     // SINGLE
@@ -21,10 +22,10 @@ function addParkingRoutes(app) {
     app.get('/parking/:parkingId/', async (req, res) => {
         const parkingId = req.params.parkingId;
 
-        var parking =  await parkingService.getById(parkingId)
+        var parking = await parkingService.getById(parkingId)
         var owner = await userService.getById(parking.ownerId)
 
-       var x =  {
+        var x = {
             parking: parking,
             owner: owner
         }
@@ -62,7 +63,7 @@ function addParkingRoutes(app) {
     //     parkingService.update(parking)
     //         .then(parking => res.json(parking))
     // })
-    
+
 
 
     // stop Parking
