@@ -1,4 +1,4 @@
-const mongoService = require('./mongo-service') 
+const mongoService = require('./mongo-service')
 
 const ObjectId = require('mongodb').ObjectId;
 
@@ -48,6 +48,9 @@ function getReservedParkingsByUserId(userId) {
 function add(parking) {
     console.log('parking49:',parking);
     parking.ownerId = new ObjectId(parking.ownerId);
+<<<<<<< HEAD
+    parking.createdAt = Date.now();
+=======
     console.log('parking.ownerId!!!!!!!', parking.ownerId);
     parking.position = {
         type : 'Point',
@@ -55,6 +58,7 @@ function add(parking) {
     }
     
     parking.createdAt = Date.now(); 
+>>>>>>> c38c79518a1530aba64bef808a055bd9ccdb532c
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('tester2');
@@ -78,9 +82,9 @@ function reserve(parking) {
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('parking');
-            return collection.updateOne({ _id: parking._id }, 
-                             { $set:{reserverId: parking.reserverId, occupiedUntil: parking.occupiedUntil} })
-                .then(result => {                    
+            return collection.updateOne({ _id: parking._id },
+                { $set: { reserverId: parking.reserverId, occupiedUntil: parking.occupiedUntil } })
+                .then(result => {
                     return parking;
                 })
         })
@@ -116,6 +120,31 @@ function stop(parking) {
         })
 }
 
+async function getParkingsByLocation(lng, lat) {
+    var db = await mongoService.connect()
+    return db.collection('parking')
+        .find({
+            "position": {
+                $near: {
+                    $geometry: {
+                        type: "Point",
+                        coordinates: [
+                            lng,
+                            lat
+                        ]
+                    }
+                }
+            }
+        }).toArray()
+}
+
+// getParkingsByLocation(34.835, 32.138,).then(x => {
+//     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+//     console.log(x)
+//     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+
+// })
+
 module.exports = {
     query,
     remove,
@@ -125,5 +154,6 @@ module.exports = {
     reserve,
     stop,
     getOwnedParkingsByUserId,
-    getReservedParkingsByUserId
+    getReservedParkingsByUserId,
+    getParkingsByLocation
 }
