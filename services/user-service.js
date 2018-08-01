@@ -42,6 +42,16 @@ function query() {
 //  }
 
 
+function addUser(newUser) {
+    return mongoService.connect()
+    .then(db => {
+        const collection = db.collection('user');        
+        return collection.insertOne(newUser)
+            .then(result => {              
+                return newUser;
+            })
+    })
+}
 
 
 
@@ -51,5 +61,5 @@ module.exports = {
     query,
     getById,
     checkLogin,
-    // addUser,
+    addUser,
 }

@@ -28,18 +28,7 @@ function addUserRoutes(app) {
             console.log('reserved parkings: ', {reservedParkings})
             console.log('owned parkings: ', {ownedParkings})
             res.json({user,reservedParkings,ownedParkings}) 
-        })
-
-
-        // Promise.all([
-        //     userService.getById(userId),
-        //     parkingService.getByOwnerId(userId),
-        //     parkingService.getByReservedId(userId)
-        // ])
-        // .then(([user, ownedParkings,reserveParkings]) => {
-        //     console.log({user})
-        //     res.json({user,ownedParkings,reserveParkings})
-        // })
+        })       
     })
 
     app.post(`${BASE}/checkLogin`, (req,res) => {
@@ -53,6 +42,13 @@ function addUserRoutes(app) {
             res.json(user)
         })
         .catch(err => res.status(401).send('Wrong user/pass'))        
+    })
+
+    app.post(`${BASE}/add`, (req,res) => {
+        console.log('new user req body: ', req.body)
+        var newUser = req.body
+        userService.addUser(newUser)
+        .then(newUser =>  res.json(newUser))
     })
 }
 
