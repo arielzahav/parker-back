@@ -48,15 +48,8 @@ function getReservedParkingsByUserId(userId) {
 }
 function add(parking) {
     console.log('parking49:',parking);
-<<<<<<< HEAD
     parking.ownerId = new ObjectId(parking.ownerId);
-<<<<<<< HEAD
-=======
-    parking.createdAt = Date.now();
->>>>>>> 6b496a0fa50ec9d0b1f9ab42bc7aa36dec4de55b
-=======
      parking.ownerId = new ObjectId(parking.ownerId);
->>>>>>> aa235653d3e76bb9f38ba52307ab8870ad35bb9b
     console.log('parking.ownerId!!!!!!!', parking.ownerId);
     parking.position = {
         type : 'Point',
