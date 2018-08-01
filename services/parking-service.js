@@ -49,18 +49,25 @@ function add(parking) {
     console.log('parking49:',parking);
     parking.ownerId = new ObjectId(parking.ownerId);
     parking.createdAt = Date.now();
+    console.log('parking.ownerId!!!!!!!', parking.ownerId);
+    parking.position = {
+        type : 'Point',
+        coordinates  : [parking.location.lat, parking.location.lng]
+    }
+    
+    parking.createdAt = Date.now(); 
     return mongoService.connect()
         .then(db => {
-            const collection = db.collection('tester');
+            const collection = db.collection('tester2');
             console.log('parking55:',parking);
             return collection.insertOne(parking)
                 .then(result => {
+                    // console.log('result: ', result)
                     parking._id = result.insertedId;
                     return parking;
                 })
         })
 }
-
 
 
 function reserve(parking) {
@@ -122,10 +129,13 @@ async function getParkingsByLocation(lng, lat) {
                             lat
                         ]
                     },
-                 $maxDistance: 10000
+                //  $maxDistance: 10000
                 }
             }
-        }).toArray()
+        }).toArray().then(x => {
+            console.log(x)
+            return x
+        })
 }
 
 // getParkingsByLocation(34.835, 32.138,).then(x => {
