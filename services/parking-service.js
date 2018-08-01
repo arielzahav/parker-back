@@ -48,6 +48,10 @@ function getReservedParkingsByUserId(userId) {
 function add(parking) {
     console.log('parking49:',parking);
     parking.ownerId = new ObjectId(parking.ownerId);
+<<<<<<< HEAD
+=======
+    parking.createdAt = Date.now();
+>>>>>>> 6b496a0fa50ec9d0b1f9ab42bc7aa36dec4de55b
     console.log('parking.ownerId!!!!!!!', parking.ownerId);
     parking.position = {
         type : 'Point',
@@ -67,7 +71,6 @@ function add(parking) {
                 })
         })
 }
-
 
 
 function reserve(parking) {
@@ -128,10 +131,14 @@ async function getParkingsByLocation(lng, lat) {
                             lng,
                             lat
                         ]
-                    }
+                    },
+                //  $maxDistance: 10000
                 }
             }
-        }).toArray()
+        }).toArray().then(x => {
+            console.log(x)
+            return x
+        })
 }
 
 // getParkingsByLocation(34.835, 32.138,).then(x => {
