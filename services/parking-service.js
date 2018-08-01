@@ -2,12 +2,11 @@ const mongoService = require('./mongo-service')
 
 const ObjectId = require('mongodb').ObjectId;
 
-const PARKING_DB = 'parking';
 
 function query() {
     return mongoService.connect()
         .then(db => {
-            const collection = db.collection(PARKING_DB);
+            const collection = db.collection('parking');
             return collection.find({}).toArray()
         })
 }
@@ -16,7 +15,7 @@ function remove(parkingId) {
     parkingId = new ObjectId(parkingId)
     return mongoService.connect()
         .then(db => {
-            const collection = db.collection(PARKING_DB);
+            const collection = db.collection('parking');
             return collection.remove({ _id: parkingId })
         })
 }
@@ -24,7 +23,7 @@ function getById(parkingId) {
     parkingId = new ObjectId(parkingId)
     return mongoService.connect()
         .then(db => {
-            const collection = db.collection(PARKING_DB);
+            const collection = db.collection('parking');
             return collection.findOne({ _id: parkingId })
         })
 }
@@ -33,7 +32,7 @@ function getOwnedParkingsByUserId(userId) {
     userId = new ObjectId(userId)
     return mongoService.connect()
         .then(db => {
-            const collection = db.collection(PARKING_DB);
+            const collection = db.collection('parking');
             return collection.find({ ownerId: userId }).toArray();
         })
 }
@@ -42,21 +41,13 @@ function getReservedParkingsByUserId(userId) {
     userId = new ObjectId(userId)
     return mongoService.connect()
         .then(db => {
-            const collection = db.collection(PARKING_DB);
+            const collection = db.collection('parking');
             return collection.find({ reserverId: userId }).toArray();
         })
 }
 function add(parking) {
     console.log('parking49:',parking);
-<<<<<<< HEAD
     parking.ownerId = new ObjectId(parking.ownerId);
-<<<<<<< HEAD
-=======
-    parking.createdAt = Date.now();
->>>>>>> 6b496a0fa50ec9d0b1f9ab42bc7aa36dec4de55b
-=======
-     parking.ownerId = new ObjectId(parking.ownerId);
->>>>>>> aa235653d3e76bb9f38ba52307ab8870ad35bb9b
     console.log('parking.ownerId!!!!!!!', parking.ownerId);
     parking.position = {
         type : 'Point',
@@ -66,7 +57,7 @@ function add(parking) {
     parking.createdAt = Date.now(); 
     return mongoService.connect()
         .then(db => {
-            const collection = db.collection('tester3');
+            const collection = db.collection('tester2');
             console.log('parking55:',parking);
             return collection.insertOne(parking)
                 .then(result => {
@@ -85,7 +76,7 @@ function reserve(parking) {
     console.log(parking)
     return mongoService.connect()
         .then(db => {
-            const collection = db.collection(PARKING_DB);
+            const collection = db.collection('parking');
             return collection.updateOne({ _id: parking._id },
                 { $set: { reserverId: parking.reserverId, occupiedUntil: parking.occupiedUntil } })
                 .then(result => {
@@ -102,7 +93,7 @@ function update(parking) {
     parking.ownerId = new Object(parking.ownerId)
     return mongoService.connect()
         .then(db => {
-            const collection = db.collection(PARKING_DB);
+            const collection = db.collection('parking');
             return collection.updateOne({ _id: parking._id }, { $set: parking })
                 .then(result => {
                     return parking;
@@ -116,7 +107,7 @@ function stop(parking) {
     parking.ownerId = new ObjectId(parking.ownerId)
     return mongoService.connect()
         .then(db => {
-            const collection = db.collection(PARKING_DB);
+            const collection = db.collection('parking');
             return collection.updateOne({ _id: parking._id }, { $set: parking })
                 .then(result => {
                     return parking;
@@ -126,7 +117,7 @@ function stop(parking) {
 
 async function getParkingsByLocation(lng, lat) {
     var db = await mongoService.connect()
-    return db.collection(PARKING_DB)
+    return db.collection('parking')
         .find({
             "position": {
                 $near: {
