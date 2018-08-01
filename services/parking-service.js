@@ -70,7 +70,6 @@ function add(parking) {
 }
 
 
-
 function reserve(parking) {
     console.log('rsv parking in backend service: ', parking)
     parking.reserverId = new ObjectId(parking.reserverId)
@@ -129,10 +128,14 @@ async function getParkingsByLocation(lng, lat) {
                             lng,
                             lat
                         ]
-                    }
+                    },
+                //  $maxDistance: 10000
                 }
             }
-        }).toArray()
+        }).toArray().then(x => {
+            console.log(x)
+            return x
+        })
 }
 
 // getParkingsByLocation(34.835, 32.138,).then(x => {
