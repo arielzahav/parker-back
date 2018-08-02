@@ -133,10 +133,7 @@ async function getParkingsByLocation(lng, lat) {
                 //  $maxDistance: 10000
                 }
             }
-        }).toArray().then(x => {
-            console.log(x)
-            return x
-        })
+        }).toArray()
 }
 
 // getParkingsByLocation(34.835, 32.138,).then(x => {
