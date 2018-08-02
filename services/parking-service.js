@@ -58,7 +58,7 @@ function add(parking) {
     parking.createdAt = Date.now(); 
     return mongoService.connect()
         .then(db => {
-            const collection = db.collection(PARKING_DB);
+            const collection = db.collection('parking');
             console.log('parking55:',parking);
             return collection.insertOne(parking)
                 .then(result => {
