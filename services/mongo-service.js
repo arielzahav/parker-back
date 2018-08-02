@@ -7,9 +7,6 @@ function connectToMongo() {
     
     const url = 'mongodb://admin:admin123@ds247121.mlab.com:47121/parker_db' 
     
-    // const url = (!process.env.PORT)? 
-    //                 'mongodb://localhost:27017/parker_db' : 'mlab url'
-    
     return MongoClient.connect(url)
         .then(client => {
             console.log('Connected to MongoDB');
