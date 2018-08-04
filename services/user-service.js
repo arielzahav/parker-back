@@ -11,6 +11,7 @@ function checkLogin(user) {
             console.log('user found in DB blalalalala user from a then!!!!: ', user)
             if (user._id) return Promise.resolve(user)
             else return Promise.reject
+            //return user;
         })
 }
 

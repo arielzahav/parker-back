@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/img/user1.4f2ec149.jpg"
   },
   {
-    "revision": "3224d49e1c2860bf03993f5a482be3dd",
+    "revision": "55021880b5f60a9171d8c9952a4c054b",
     "url": "/index.html"
   },
   {
@@ -28,8 +28,8 @@ self.__precacheManifest = [
     "url": "/img/waze.b7cdbe43.png"
   },
   {
-    "revision": "3f1280e547ace0ddd3bd",
-    "url": "/js/app.3f1280e5.js"
+    "revision": "82a3f66bece85d9908c3",
+    "url": "/js/app.82a3f66b.js"
   },
   {
     "revision": "8ad775da178a40533846f9ef66e3bab5",
@@ -52,7 +52,7 @@ self.__precacheManifest = [
     "url": "/css/chunk-vendors.dd1d0a49.css"
   },
   {
-    "revision": "3f1280e547ace0ddd3bd",
-    "url": "/css/app.5533daeb.css"
+    "revision": "82a3f66bece85d9908c3",
+    "url": "/css/app.99ec51d5.css"
   }
 ];
