@@ -7,12 +7,12 @@ function checkLogin(user) {
     console.log('email transferred to backend uesr service: ', user.userInfo)
     return mongoService.connect()
         .then(db => db.collection('user').findOne({ password: user.userInfo.password, eMail: user.userInfo.email }))
-        .then(user => {
-            console.log('user found in DB blalalalala user from a then!!!!: ', user)
-            if (user._id) return Promise.resolve(user)
-            else return Promise.reject
-            //return user;
-        })
+        // .then(user => {
+        //     console.log('user found in DB  user from a then!!!!: ', user)
+        //     if (user._id) return Promise.resolve(user)
+        //     else return Promise.reject
+        //     //return user;
+        // })
 }
 
 
