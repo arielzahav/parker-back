@@ -135,12 +135,7 @@ async function getParkingsByLocation(lng, lat) {
         }).toArray()
 }
 
-// getParkingsByLocation(34.835, 32.138,).then(x => {
-//     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-//     console.log(x)
-//     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
-// })
 
 module.exports = {
     query,
