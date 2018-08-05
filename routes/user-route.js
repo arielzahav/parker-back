@@ -38,10 +38,11 @@ function addUserRoutes(app) {
         .then (user => {
             console.log('user returned to user route: ', user)
             req.session.user = user
-            console.log('req.session.user: ',req.session.user )            
-            res.json(user)
+            console.log('req.session.user: ',req.session.user )  
+            if (user)   res.json(user)
+            else res.status(401).send('Wrong user/pass');
         })
-        .catch(err => res.status(401).send('Wrong user/pass'))        
+      //  .catch(err => res.status(401).send('Wrong user/pass'))        
     })
 
     app.post(`${BASE}/add`, (req,res) => {
