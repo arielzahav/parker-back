@@ -34,6 +34,7 @@ function addUserRoutes(app) {
     app.post(`${BASE}/checkLogin`, (req,res) => {
         console.log('req ', req)
         var userInfo = req.body
+        console.log('user info aaa: ', userInfo)
         userService.checkLogin(userInfo)
         .then (user => {
             console.log('user returned to user route: ', user)

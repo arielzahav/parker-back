@@ -3,10 +3,10 @@ const mongoService = require('./mongo-service');
 const ObjectId = require('mongodb').ObjectId;
 
 
-function checkLogin(user) {
-    console.log('email transferred to backend uesr service: ', user.userInfo)
+function checkLogin(userInfo) {
+    console.log('email transferred to backend uesr service: ', userInfo)
     return mongoService.connect()
-        .then(db => db.collection('user').findOne({ password: user.userInfo.password, eMail: user.userInfo.email }))
+        .then(db => db.collection('user').findOne({ password: userInfo.password, email: userInfo.email }))
         // .then(user => {
         //     console.log('user found in DB  user from a then!!!!: ', user)
         //     if (user._id) return Promise.resolve(user)
