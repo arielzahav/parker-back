@@ -58,10 +58,6 @@ function add(parking) {
             const collection = db.collection('parking');
             return collection.insertOne(parking)
                 .then(result => {
-<<<<<<< HEAD
-                    console.log('res got!', result)
-=======
->>>>>>> 7e6e6425f797a50836d63d18f77896af26b56363
                     parking._id = result.insertedId;
                     return parking;
                 })
