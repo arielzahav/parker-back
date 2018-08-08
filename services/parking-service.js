@@ -72,7 +72,7 @@ function reserve(parking) {
         .then(db => {
             const collection = db.collection('parking');
             return collection.updateOne({ _id: parking._id },
-                { $set: { reserverId: parking.reserverId, occupiedUntil: parking.occupiedUntil } })
+                { $set: { reserverId: parking.reserverId, occupiedUntil: parking.occupiedUntil, iconUrl: parking.iconUrl } })
                 .then(result => {
                     return parking;
                 })
