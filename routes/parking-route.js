@@ -25,10 +25,6 @@ function addParkingRoutes(app) {
             owner: owner
         }
         res.json(x)
-<<<<<<< HEAD
-=======
-      
->>>>>>> 7e6e6425f797a50836d63d18f77896af26b56363
     })
 
     // CREATE
