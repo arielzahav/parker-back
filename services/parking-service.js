@@ -46,10 +46,7 @@ function getReservedParkingsByUserId(userId) {
         })
 }
 function add(parking) {
-    console.log('parking49:',parking);
-    parking.ownerId = new ObjectId(parking.ownerId);
-  
-    console.log('parking.ownerId!!!!!!!', parking.ownerId);
+    parking.ownerId = new ObjectId(parking.ownerId);  
     parking.position = {
         type : 'Point',
         coordinates  : [parking.location.lat, parking.location.lng]
@@ -59,10 +56,8 @@ function add(parking) {
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('parking');
-            console.log('parking55:',parking);
             return collection.insertOne(parking)
                 .then(result => {
-                    // console.log('result: ', result)
                     parking._id = result.insertedId;
                     return parking;
                 })
@@ -71,10 +66,8 @@ function add(parking) {
 
 
 function reserve(parking) {
-    console.log('rsv parking in backend service: ', parking)
     parking.reserverId = new ObjectId(parking.reserverId)
     parking._id = new ObjectId(parking._id)
-    console.log(parking)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('parking');

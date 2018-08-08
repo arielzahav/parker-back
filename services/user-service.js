@@ -17,9 +17,7 @@ function checkLogin(userInfo) {
 
 
 function getById(userId) {
-    console.log('get by id: ', userId)
     const _id = new ObjectId(userId)
-    console.log('userId: ', _id)
     return mongoService.connect()
         .then(db => db.collection('user').findOne({ _id }))
 }
