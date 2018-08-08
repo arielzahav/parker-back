@@ -62,7 +62,7 @@ function add(parking) {
             console.log('parking55:',parking);
             return collection.insertOne(parking)
                 .then(result => {
-                    // console.log('result: ', result)
+                    console.log('res got!', result)
                     parking._id = result.insertedId;
                     return parking;
                 })
@@ -102,9 +102,7 @@ function update(parking) {
         })
 }
 function stop(parking) {
-    console.log('parking in the parking service in backend: ', parking)
     parking._id = new ObjectId(parking._id)
-    // parking.reserverId = new Object(parking.reserverId)
     parking.ownerId = new ObjectId(parking.ownerId)
     return mongoService.connect()
         .then(db => {

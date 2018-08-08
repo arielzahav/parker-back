@@ -31,15 +31,6 @@ function addParkingRoutes(app) {
             owner: owner
         }
         res.json(x)
-        // Promise.all([
-        //     parkingService.getById(parkingId),
-        //     userService.query({ownerId})
-        // ])
-        // .then(([parking,reviews]) => {
-        //     res.json( {
-        //         parking,reviews
-        //     })
-        // })
     })
 
     // CREATE
