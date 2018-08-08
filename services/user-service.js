@@ -7,14 +7,21 @@ function checkLogin(userInfo) {
     console.log('email transferred to backend uesr service: ', userInfo)
     return mongoService.connect()
         .then(db => db.collection('user').findOne({ password: userInfo.password, email: userInfo.email }))
+<<<<<<< HEAD
 
+=======
+        // .then(user => {
+        //     console.log('user found in DB  user from a then!!!!: ', user)
+        //     if (user._id) return Promise.resolve(user)
+        //     else return Promise.reject
+        //     //return user;
+        // })
+>>>>>>> 7e6e6425f797a50836d63d18f77896af26b56363
 }
 
 
 function getById(userId) {
-    console.log('get by id: ', userId)
     const _id = new ObjectId(userId)
-    console.log('userId: ', _id)
     return mongoService.connect()
         .then(db => db.collection('user').findOne({ _id }))
 }
