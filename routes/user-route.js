@@ -26,22 +26,15 @@ function addUserRoutes(app) {
             parkingService.getReservedParkingsByUserId(userId)
         ])
             .then(([user, ownedParkings, reservedParkings]) => {
-                console.log('user: ', { user })
-                console.log('reserved parkings: ', { reservedParkings })
-                console.log('owned parkings: ', { ownedParkings })
                 res.json({ user, reservedParkings, ownedParkings })
             })
     })
 
     app.post(`${BASE}/checkLogin`, (req, res) => {
-        console.log('req ', req)
         var userInfo = req.body
-        console.log('user info aaa: ', userInfo)
         userService.checkLogin(userInfo)
             .then(user => {
-                console.log('user returned to user route: ', user)
                 req.session.user = user
-                console.log('req.session.user: ', req.session.user)
                 if (user) res.json(user)
                 else res.status(401).send('Wrong user/pass');
             })

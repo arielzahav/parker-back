@@ -81,7 +81,6 @@ function reserve(parking) {
 
 
 function update(parking) {
-    console.log('parking in the parking service in backend: ', parking)
     parking._id = new ObjectId(parking._id)
     parking.reserverId = new Object(parking.reserverId)
     parking.ownerId = new Object(parking.ownerId)
@@ -96,7 +95,7 @@ function update(parking) {
 }
 function stop(parking) {
     parking._id = new ObjectId(parking._id)
-    parking.ownerId = new ObjectId(parking.ownerId)
+    parking.ownerId = new ObjectId(parking.ownerId)    
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('parking');
