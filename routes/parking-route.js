@@ -42,12 +42,12 @@ function addParkingRoutes(app) {
     })
 
 
-    // // UPDATE
-    // app.put('/parking/:parkingId', (req, res) => {
-    //     const parking = req.body;
-    //     parkingService.update(parking)
-    //         .then(parking => res.json(parking))
-    // })
+    // UPDATE
+    app.put('/parking/:parkingId', (req, res) => {
+        const parking = req.body;
+        parkingService.update(parking)
+            .then(parking => res.json(parking))
+    })
 
 
 

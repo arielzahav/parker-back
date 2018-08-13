@@ -26,9 +26,6 @@ function addUserRoutes(app) {
             parkingService.getReservedParkingsByUserId(userId)
         ])
             .then(([user, ownedParkings, reservedParkings]) => {
-                console.log('user: ', { user })
-                console.log('reserved parkings: ', { reservedParkings })
-                console.log('owned parkings: ', { ownedParkings })
                 res.json({ user, reservedParkings, ownedParkings })
             })
     })
