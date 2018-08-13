@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.4.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.0bf3b41f93cd25fd68d3ffc258057edb.js"
+  "/precache-manifest.68a40bcad797e08ad6dbcac061e603be.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "parker-app"});
