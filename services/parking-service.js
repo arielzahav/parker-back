@@ -72,7 +72,7 @@ function reserve(parking) {
         .then(db => {
             const collection = db.collection('parking');
             return collection.updateOne({ _id: parking._id },
-                { $set: { reserverId: parking.reserverId, occupiedUntil: parking.occupiedUntil } })
+                { $set: { reserverId: parking.reserverId, occupiedUntil: parking.occupiedUntil, iconUrl: parking.iconUrl } })
                 .then(result => {
                     return parking;
                 })
@@ -81,7 +81,6 @@ function reserve(parking) {
 
 
 function update(parking) {
-    console.log('parking in the parking service in backend: ', parking)
     parking._id = new ObjectId(parking._id)
     if(parking.reserverId) parking.reserverId = new ObjectId(parking.reserverId)
     parking.ownerId = new ObjectId(parking.ownerId)
@@ -96,7 +95,7 @@ function update(parking) {
 }
 function stop(parking) {
     parking._id = new ObjectId(parking._id)
-    parking.ownerId = new ObjectId(parking.ownerId)
+    parking.ownerId = new ObjectId(parking.ownerId)    
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('parking');

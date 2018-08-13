@@ -7,12 +7,15 @@ function checkLogin(userInfo) {
     console.log('email transferred to backend uesr service: ', userInfo)
     return mongoService.connect()
         .then(db => db.collection('user').findOne({ password: userInfo.password, email: userInfo.email }))
+<<<<<<< HEAD
         // .then(user => {
         //     console.log('user found in DB  user from a then!!!!: ', user)
         //     if (user._id) return Promise.resolve(user)
         //     else return Promise.reject
         //     //return user;
         // })
+=======
+>>>>>>> 39b5334319de05f00a464f037730439def6cd8b0
 }
 
 
